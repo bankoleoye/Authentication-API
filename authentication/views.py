@@ -11,6 +11,7 @@ from .otp_generator import generateOTP
 import jwt
 from django.conf import settings
 from rest_framework.views import APIView
+from django.contrib.auth import authenticate, logout
 # Create your views here.
 
 

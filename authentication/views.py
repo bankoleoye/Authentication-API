@@ -66,10 +66,8 @@ class Login(generics.GenericAPIView):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)    
         return Response(serializer.data, status=status.HTTP_200_OK)        
-
-
-class Logout(APIView):
-    def get(self, request, format=None):
-        request.user.auth_token.delete()
-        return Response(status=status.HTTP_200_OK)
     
+class Logout(generics.GenericAPIView):
+    def get(self, request):
+        logout(request)
+        return Response(status=status.HTTP_200_OK)

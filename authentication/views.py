@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics, status, exceptions, serializers
-from .serializers import RegisterSerializer
+from .serializers import RegisterSerializer, LoginSerializer
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import User
@@ -60,12 +60,12 @@ class VerifyEmail(generics.GenericAPIView):
             return Response({'error':'invalid token'}, status=status.HTTP_400_BAD_REQUEST)
 
 
-# class LoginAPIView(generics.GenericAPIView):
-#     serializer_class = LoginSerializer
-#     def post(self, request):
-#         serializer = self.serializer_class(data=request.data)
-#         serializer.is_valid(raise_exception=True)    
-#         return Response(serializer.data, status=status.HTTP_200_OK)        
+class Login(generics.GenericAPIView):
+    serializer_class = LoginSerializer
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)    
+        return Response(serializer.data, status=status.HTTP_200_OK)        
 
 
 class Logout(APIView):
